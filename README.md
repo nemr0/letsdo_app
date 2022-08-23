@@ -1,16 +1,10 @@
 # letsdo_app
 
-A new Flutter project.
+## An Implementation of A TODO App with Flutter+MongoDB
 
-## Getting Started
+Thanks for beautiful design of [Let's Do](https://www.behance.net/gallery/72614427/To-Do-App-Concept/modules/422879473 "Let's Do") from [Rita Deyneko](https://www.behance.net/deinekorit4196 "Rita Deyneko") & [Dunice LLC](https://www.behance.net/dunicellc "Dunice LLC"),
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This is an Implementation of a TODO App using:
+- Flutter Hooks
+- Riverpod
+- MongoDB
