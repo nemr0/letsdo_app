@@ -20,7 +20,7 @@ class ThemeOfLetsDo {
         brightness: Brightness.light,
         textTheme: const TextTheme(
           labelLarge: TextStyle(
-              fontSize: 36,
+              fontSize: 42,
               color: primaryTextColor,
               fontWeight: FontWeight.bold,
               wordSpacing: 3),
@@ -70,7 +70,7 @@ class ThemeOfLetsDo {
         ),
         textTheme: const TextTheme(
           labelLarge: TextStyle(
-              fontSize: 36,
+              fontSize: 42,
               color: whiteColor,
               fontWeight: FontWeight.bold,
               wordSpacing: 3),

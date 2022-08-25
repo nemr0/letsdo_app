@@ -5,10 +5,10 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../constants.dart';
 import '../handlers/handle_statusbar_brightness.dart';
 import '../widgets/already_a_user.dart';
-import '../widgets/button.dart';
+import '../widgets/buttons/button.dart';
 
 class WelcomeOneScreen extends StatelessWidget {
-  static const String id = '/w1';
+  static const String id = '/welcome1';
 
   const WelcomeOneScreen({
     Key? key,
@@ -65,7 +65,7 @@ class WelcomeOneScreen extends StatelessWidget {
 
 class WelcomeTwoScreen extends StatelessWidget {
   const WelcomeTwoScreen({Key? key}) : super(key: key);
-  static const String id = '/w2';
+  static const String id = '/welcome2';
 
   @override
   Widget build(BuildContext context) {
@@ -107,9 +107,7 @@ class WelcomeTwoScreen extends StatelessWidget {
           btnMode: ButtonMode.full,
           onPressed: () => Navigator.pushNamed(context, SignUpScreen.id),
         ),
-        AlreadyAUser(
-          onPressed: () {},
-        ),
+        const AlreadyAUser(),
         const Spacer(),
       ],
     ));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:letsdo_app/theme.dart';
+import 'package:letsdo_app/view/screens/login.dart';
 import 'package:letsdo_app/view/screens/signup.dart';
 import 'package:letsdo_app/view/screens/welcome.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         WelcomeOneScreen.id: (context) => const WelcomeOneScreen(),
         WelcomeTwoScreen.id: (context) => const WelcomeTwoScreen(),
         SignUpScreen.id: (context) => const SignUpScreen(),
+        LoginScreen.id: (context) => const LoginScreen(),
       },
     );
   }

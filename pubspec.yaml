@@ -42,10 +42,20 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  icons_launcher: ^2.0.4
 
 flutter:
   uses-material-design: true
   assets:
      - assets/
-
+icons_launcher:
+  image_path: 'ic/icon.png'
+  platforms:
+    android:
+      adaptive_background_color: '#8f88cf'
+      adaptive_foreground_image: 'ic/ic_launcher_foreground.png'
+      adaptive_round_image: 'ic/ic_launcher_round.png'
+      enable: true
+    ios:
+      enable: true
 

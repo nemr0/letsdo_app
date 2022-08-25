@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:letsdo_app/view/screens/login.dart';
+import 'package:letsdo_app/view/widgets/buttons/not_styled_button.dart';
 
 class AlreadyAUser extends StatelessWidget {
   const AlreadyAUser({
     Key? key,
-    required this.onPressed,
   }) : super(key: key);
-  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,14 +18,11 @@ class AlreadyAUser extends StatelessWidget {
             'ALREADY HAVE AN ACCOUNT?',
             style: Theme.of(context).textTheme.bodySmall,
           ),
-          TextButton(
-            key: key,
-            onPressed: onPressed,
-            child: Text(
-              'LOG IN',
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
-          ),
+          NotStyledButton(
+              onPressed: () {
+                Navigator.pushNamed(context, LoginScreen.id);
+              },
+              text: 'LOG IN'),
         ],
       ),
     );
