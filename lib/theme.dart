@@ -4,6 +4,18 @@ import 'package:letsdo_app/constants.dart';
 
 class ThemeOfLetsDo {
   static ThemeData lightTheme() => ThemeData(
+        colorScheme: lightScheme,
+        errorColor: errorLightColor,
+        inputDecorationTheme: const InputDecorationTheme(
+            hintStyle: TextStyle(color: primaryColor, fontSize: 17),
+            fillColor: primaryShadeColor,
+            filled: true,
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
+            )),
         scaffoldBackgroundColor: whiteColor,
         brightness: Brightness.light,
         textTheme: const TextTheme(
@@ -36,6 +48,21 @@ class ThemeOfLetsDo {
       );
 
   static ThemeData darkTheme() => ThemeData(
+        textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: Colors.white, selectionColor: primaryColor),
+        colorScheme: darkScheme,
+        errorColor: Colors.redAccent,
+        inputDecorationTheme: const InputDecorationTheme(
+          hintStyle: TextStyle(color: primaryColor, fontSize: 17),
+          fillColor: primaryTextColor,
+          filled: true,
+          border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
+        ),
         scaffoldBackgroundColor: blackColor,
         brightness: Brightness.dark,
         buttonTheme: const ButtonThemeData(

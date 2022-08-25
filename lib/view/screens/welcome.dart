@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:letsdo_app/view/widgets/not_styled_button.dart';
+import 'package:letsdo_app/view/screens/signup.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import '../../constants.dart';
 import '../handlers/handle_statusbar_brightness.dart';
+import '../widgets/already_a_user.dart';
 import '../widgets/button.dart';
 
 class WelcomeOneScreen extends StatelessWidget {
@@ -104,24 +105,10 @@ class WelcomeTwoScreen extends StatelessWidget {
           controller: RoundedLoadingButtonController(),
           text: 'Sign Up',
           btnMode: ButtonMode.full,
-          onPressed: () {},
+          onPressed: () => Navigator.pushNamed(context, SignUpScreen.id),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'ALREADY HAVE AN ACCOUNT?',
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              NotStyledButton(
-                text: 'LOG IN',
-                onTap: () {},
-              ),
-            ],
-          ),
+        AlreadyAUser(
+          onPressed: () {},
         ),
         const Spacer(),
       ],
