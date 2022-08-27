@@ -4,7 +4,6 @@ import 'package:letsdo_app/view/widgets/buttons/arrow_back_button.dart';
 import 'package:letsdo_app/view/widgets/buttons/not_styled_button.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-import '../widgets/already_a_user.dart';
 import '../widgets/buttons/button.dart';
 import '../widgets/custom_textfield.dart';
 
@@ -39,11 +38,13 @@ class LoginScreen extends StatelessWidget {
               flex: 3,
             ),
             CustomTextField(
+              tag: 'username',
               width: width,
-              name: 'Email',
+              name: 'Username/Email',
             ),
             const Spacer(),
             CustomTextField(
+              tag: 'password',
               width: width,
               name: 'Password',
               isObscure: true,
@@ -63,7 +64,8 @@ class LoginScreen extends StatelessWidget {
               flex: 9,
             ),
             NotStyledButton(
-                onPressed: () => Navigator.pushNamed(context, SignUpScreen.id),
+                onPressed: () =>
+                    Navigator.pushReplacementNamed(context, SignUpScreen.id),
                 text: 'SIGN UP'),
             const Spacer(
               flex: 2,

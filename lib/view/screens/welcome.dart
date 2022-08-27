@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:letsdo_app/main.dart';
+import 'package:letsdo_app/model/auth/login.dart';
 import 'package:letsdo_app/view/screens/signup.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
@@ -50,11 +52,11 @@ class WelcomeOneScreen extends StatelessWidget {
             ),
             Image.asset('assets/w1.png'),
             Button(
-              controller: RoundedLoadingButtonController(),
               text: 'Get Started',
               btnMode: ButtonMode.start,
               onPressed: () {
-                Navigator.of(context).pushNamed(WelcomeTwoScreen.id);
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil(WelcomeTwoScreen.id, (r) => false);
               },
               animateOnTap: false,
             ),
@@ -107,7 +109,9 @@ class WelcomeTwoScreen extends StatelessWidget {
           btnMode: ButtonMode.full,
           onPressed: () => Navigator.pushNamed(context, SignUpScreen.id),
         ),
-        const AlreadyAUser(),
+        const AlreadyAUser(
+          isWelcome: true,
+        ),
         const Spacer(),
       ],
     ));

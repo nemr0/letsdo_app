@@ -38,16 +38,19 @@ class SignUpScreen extends StatelessWidget {
               flex: 2,
             ),
             CustomTextField(
+              tag: 'username',
               width: width,
-              name: 'Name',
+              name: 'Username',
             ),
             const Spacer(),
             CustomTextField(
+              tag: 'email',
               width: width,
               name: 'Email',
             ),
             const Spacer(),
             CustomTextField(
+              tag: 'password',
               width: width,
               name: 'Password',
               isObscure: true,
@@ -63,7 +66,9 @@ class SignUpScreen extends StatelessWidget {
                 controller: RoundedLoadingButtonController(),
                 text: 'Sign Up',
                 animateOnTap: true),
-            const AlreadyAUser(),
+            const AlreadyAUser(
+              isWelcome: false,
+            ),
             const Spacer(
               flex: 3,
             ),

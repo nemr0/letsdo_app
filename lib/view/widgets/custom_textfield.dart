@@ -6,6 +6,7 @@ import '../../constants.dart';
 class CustomTextField extends HookWidget {
   const CustomTextField({
     Key? key,
+    required this.tag,
     this.onSubmitted,
     required this.width,
     this.textInputAction = TextInputAction.next,
@@ -15,13 +16,14 @@ class CustomTextField extends HookWidget {
   final TextInputAction textInputAction;
   final double width;
   final String name;
+  final String tag;
   final bool isObscure;
   final void Function(String)? onSubmitted;
   @override
   Widget build(BuildContext context) {
     final isVisible = useState(true);
     return Hero(
-      tag: name,
+      tag: tag,
       child: Material(
         type: MaterialType.transparency,
         child: SizedBox(

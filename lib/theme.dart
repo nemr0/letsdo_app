@@ -18,31 +18,34 @@ class ThemeOfLetsDo {
             )),
         scaffoldBackgroundColor: whiteColor,
         brightness: Brightness.light,
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           labelLarge: TextStyle(
+              fontFamily: GoogleFonts.rubik().fontFamily,
               fontSize: 42,
               color: primaryTextColor,
               fontWeight: FontWeight.bold,
               wordSpacing: 3),
           labelMedium: TextStyle(
               fontSize: 24,
+              fontFamily: GoogleFonts.rubik().fontFamily,
               color: primaryTextColor,
               fontWeight: FontWeight.bold,
               wordSpacing: 3),
-          labelSmall:
-              TextStyle(fontSize: 14, color: primaryTextColor, wordSpacing: 3),
-          titleLarge: TextStyle(
+          labelSmall: const TextStyle(
+              fontSize: 14, color: primaryTextColor, wordSpacing: 3),
+          titleLarge: const TextStyle(
               fontSize: 20,
               color: primaryTextColor,
               fontWeight: FontWeight.bold,
               wordSpacing: 3),
-          titleMedium:
-              TextStyle(fontSize: 20, color: primaryTextColor, wordSpacing: 3),
-          bodyLarge:
-              TextStyle(fontSize: 16, color: primaryTextColor, wordSpacing: 3),
-          bodyMedium:
-              TextStyle(fontSize: 16, color: primaryTextColor, wordSpacing: 3),
-          bodySmall: TextStyle(fontSize: 14, color: greyColor, wordSpacing: 3),
+          titleMedium: const TextStyle(
+              fontSize: 20, color: primaryTextColor, wordSpacing: 3),
+          bodyLarge: const TextStyle(
+              fontSize: 16, color: primaryTextColor, wordSpacing: 3),
+          bodyMedium: const TextStyle(
+              fontSize: 16, color: primaryTextColor, wordSpacing: 3),
+          bodySmall:
+              const TextStyle(fontSize: 14, color: greyColor, wordSpacing: 3),
         ),
         fontFamily: GoogleFonts.rubik().fontFamily,
       );
@@ -68,26 +71,30 @@ class ThemeOfLetsDo {
         buttonTheme: const ButtonThemeData(
           textTheme: ButtonTextTheme.primary,
         ),
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           labelLarge: TextStyle(
+              fontFamily: GoogleFonts.rubik().fontFamily,
               fontSize: 42,
               color: whiteColor,
               fontWeight: FontWeight.bold,
               wordSpacing: 3),
           labelMedium: TextStyle(
+              fontFamily: GoogleFonts.rubik().fontFamily,
               fontSize: 24,
               color: whiteColor,
               fontWeight: FontWeight.bold,
               wordSpacing: 3),
-          labelSmall:
-              TextStyle(fontSize: 14, color: primaryColor, wordSpacing: 3),
+          labelSmall: const TextStyle(
+              fontSize: 14, color: primaryColor, wordSpacing: 3),
           titleLarge:
-              TextStyle(fontSize: 20, color: whiteColor, wordSpacing: 3),
-          bodyLarge: TextStyle(fontSize: 16, color: whiteColor, wordSpacing: 3),
+              const TextStyle(fontSize: 20, color: whiteColor, wordSpacing: 3),
+          bodyLarge:
+              const TextStyle(fontSize: 16, color: whiteColor, wordSpacing: 3),
           bodyMedium:
-              TextStyle(fontSize: 14, color: whiteColor, wordSpacing: 3),
-          bodySmall: TextStyle(fontSize: 14, color: greyColor, wordSpacing: 3),
+              const TextStyle(fontSize: 14, color: whiteColor, wordSpacing: 3),
+          bodySmall:
+              const TextStyle(fontSize: 14, color: greyColor, wordSpacing: 3),
         ),
-        fontFamily: GoogleFonts.rubik().fontFamily,
+        fontFamily: GoogleFonts.roboto().fontFamily,
       );
 }

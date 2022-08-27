@@ -1,0 +1,9 @@
+flutter_native_splash:
+  color: "#FDFDFD"
+  color_dark: "#272A33"
+  image: assets_splash/splash_logo.png
+  branding_mode: bottom
+  android_gravity: center
+  ios_content_mode: center
+  info_plist_files:
+    - 'ios/Runner/Info.plist'
