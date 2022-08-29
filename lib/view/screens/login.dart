@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:letsdo_app/controller/login_signup_controllers.dart';
+import 'package:letsdo_app/view/screens/forgot_password.dart';
 import 'package:letsdo_app/view/screens/signup.dart';
 import 'package:letsdo_app/view/widgets/buttons/arrow_back_button.dart';
 import 'package:letsdo_app/view/widgets/buttons/not_styled_button.dart';
@@ -7,11 +10,11 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../widgets/buttons/button.dart';
 import '../widgets/custom_textfield.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends ConsumerWidget {
   const LoginScreen({Key? key}) : super(key: key);
   static const String id = '/login';
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Center(
@@ -38,12 +41,14 @@ class LoginScreen extends StatelessWidget {
               flex: 3,
             ),
             CustomTextField(
+              controller: ref.watch(usernameControllerProvider),
               tag: 'username',
               width: width,
               name: 'Username/Email',
             ),
             const Spacer(),
             CustomTextField(
+              controller: ref.watch(pwdControllerProvider),
               tag: 'password',
               width: width,
               name: 'Password',
@@ -66,7 +71,12 @@ class LoginScreen extends StatelessWidget {
             NotStyledButton(
                 onPressed: () =>
                     Navigator.pushReplacementNamed(context, SignUpScreen.id),
-                text: 'SIGN UP'),
+                text: 'SIGNUP'),
+            NotStyledButton(
+              isHero: false,
+              onPressed: () => Navigator.pushNamed(context, ForgotScreen.id),
+              text: 'FORGOT PASSWORD',
+            ),
             const Spacer(
               flex: 2,
             ),
@@ -75,4 +85,6 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+
+  login() {}
 }

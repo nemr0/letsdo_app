@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:letsdo_app/model/back4app/initialize.dart';
 import 'package:letsdo_app/theme.dart';
+import 'package:letsdo_app/view/screens/forgot_password.dart';
 import 'package:letsdo_app/view/screens/login.dart';
 import 'package:letsdo_app/view/screens/signup.dart';
 import 'package:letsdo_app/view/screens/welcome.dart';
@@ -7,14 +10,8 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  const String keyApplicationId = 'EUe54YRk7TDZbb1VjuGxCqE6BXdGt4BweQYBjKNb';
-  const String keyClient = '2OKZRNVbEUb2k8ioJLrlptQRe2eFWX2Vv9Qkttll';
-  const String keyParseServerUrl = 'https://parseapi.back4app.com';
-  await Parse()
-      .initialize(keyApplicationId, keyParseServerUrl, clientKey: keyClient)
-      .then((value) =>
-          debugPrint('parse Initialized? ${value.hasParseBeenInitialized()}'));
-  runApp(const MyApp());
+  await initializeParse();
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -30,7 +27,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Let\'s Do App!',
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       theme: ThemeOfLetsDo.lightTheme(),
       darkTheme: ThemeOfLetsDo.darkTheme(),
       initialRoute: WelcomeOneScreen.id,
@@ -39,6 +36,7 @@ class _MyAppState extends State<MyApp> {
         WelcomeTwoScreen.id: (context) => const WelcomeTwoScreen(),
         SignUpScreen.id: (context) => const SignUpScreen(),
         LoginScreen.id: (context) => const LoginScreen(),
+        ForgotScreen.id: (context) => const ForgotScreen(),
       },
     );
   }

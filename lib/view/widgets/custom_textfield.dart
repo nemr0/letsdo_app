@@ -6,6 +6,7 @@ import '../../constants.dart';
 class CustomTextField extends HookWidget {
   const CustomTextField({
     Key? key,
+    required this.controller,
     required this.tag,
     this.onSubmitted,
     required this.width,
@@ -13,6 +14,7 @@ class CustomTextField extends HookWidget {
     required this.name,
     this.isObscure = false,
   }) : super(key: key);
+  final TextEditingController controller;
   final TextInputAction textInputAction;
   final double width;
   final String name;
@@ -29,6 +31,7 @@ class CustomTextField extends HookWidget {
         child: SizedBox(
             width: width * .8,
             child: TextField(
+              controller: controller,
               onSubmitted: onSubmitted,
               obscureText: isObscure ? isVisible.value : false,
               textInputAction: TextInputAction.next,

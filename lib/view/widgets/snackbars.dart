@@ -1,22 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:letsdo_app/constants.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
-Future<ParseResponse> login(String email, String password, context) async {
-  ParseResponse response = await ParseUser('', password, email).create();
-
-  await Future.delayed(Duration.zero, () {
-    ScaffoldMessenger.of(context).showSnackBar(
-      snkbr(
-          response.success,
-          response.success
-              ? response.results.toString()
-              : (response.error?.message)!.toUpperCase(),
-          context),
-    );
-  });
-  return response;
-}
+import '../../constants.dart';
 
 SnackBar snkbr(bool isSuccess, String text, BuildContext context,
     {Duration? duration}) {

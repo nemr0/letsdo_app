@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:letsdo_app/main.dart';
-import 'package:letsdo_app/model/auth/login.dart';
 import 'package:letsdo_app/view/screens/signup.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
