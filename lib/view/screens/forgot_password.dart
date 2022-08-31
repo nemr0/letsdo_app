@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:letsdo_app/view/widgets/snackbars.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import 'package:rounded_loading_button/rounded_loading_button.dart';
-
-import '../../controller/login_signup_controllers.dart';
-import '../../model/back4app/auth/login.dart';
+import 'package:letsdo_app/model/validators.dart';
+import '../../action/on_forgot.dart';
+import '../../controller/login_signup_forgot_controllers.dart';
 import '../widgets/buttons/arrow_back_button.dart';
 import '../widgets/buttons/button.dart';
 import '../widgets/custom_textfield.dart';
 
-final forgotBtnController = Provider((ref) => RoundedLoadingButtonController());
-
-class ForgotScreen extends ConsumerWidget {
+class ForgotScreen extends StatelessWidget {
   const ForgotScreen({Key? key}) : super(key: key);
   static const id = '/forgot';
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(
+    BuildContext context,
+  ) {
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Center(
@@ -42,7 +38,7 @@ class ForgotScreen extends ConsumerWidget {
                         children: [
                           TextSpan(
                             text:
-                                'Please enter a username or email\nto send an email verification request',
+                                'Please enter your email\n to send a reset request',
                             style: Theme.of(context).textTheme.bodySmall,
                           )
                         ]),
@@ -51,36 +47,31 @@ class ForgotScreen extends ConsumerWidget {
             const Spacer(
               flex: 3,
             ),
-            CustomTextField(
-              controller: ref.watch(usernameControllerProvider),
-              tag: 'username',
-              width: width,
-              name: 'Username/Email',
+            Consumer(
+              builder: (BuildContext context, WidgetRef ref, Widget? child) =>
+                  Form(
+                key: ref.watch(forgotFormKey),
+                child: CustomTextField(
+                  controller: ref.watch(usernameControllerProvider),
+                  tag: 'username',
+                  width: width,
+                  name: 'Email',
+                  validator: validateEmail,
+                ),
+              ),
             ),
             const Spacer(
               flex: 3,
             ),
-            Button(
-                btnMode: ButtonMode.full,
-                onPressed: () async {
-                  ParseResponse response = await Auth()
-                      .verifyEmail(ref.read(usernameControllerProvider).text);
-                  SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-                    ScaffoldMessenger.of(context).showSnackBar(snkbr(
-                        response.success,
-                        response.success
-                            ? 'Successfully Sent Request, Check Your Mail! :)'
-                            : (response.error?.message)!,
-                        context));
-                  });
-                  final ctr = ref.read(forgotBtnController);
-                  response.success ? ctr.success() : ctr.error();
-                  await Future.delayed(const Duration(seconds: 1));
-                  ctr.reset();
-                },
-                controller: ref.watch(forgotBtnController),
-                text: 'Send Request',
-                animateOnTap: true),
+            Consumer(
+              builder: (BuildContext context, WidgetRef ref, Widget? child) =>
+                  Button(
+                      btnMode: ButtonMode.full,
+                      onPressed: () => onForgot(context, ref),
+                      controller: ref.watch(forgotBtnController),
+                      text: 'Send Request',
+                      animateOnTap: true),
+            ),
             const Spacer(
               flex: 11,
             ),

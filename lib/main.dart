@@ -3,10 +3,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:letsdo_app/model/back4app/initialize.dart';
 import 'package:letsdo_app/theme.dart';
 import 'package:letsdo_app/view/screens/forgot_password.dart';
+import 'package:letsdo_app/view/screens/home.dart';
 import 'package:letsdo_app/view/screens/login.dart';
 import 'package:letsdo_app/view/screens/signup.dart';
 import 'package:letsdo_app/view/screens/welcome.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +37,7 @@ class _MyAppState extends State<MyApp> {
         SignUpScreen.id: (context) => const SignUpScreen(),
         LoginScreen.id: (context) => const LoginScreen(),
         ForgotScreen.id: (context) => const ForgotScreen(),
+        HomeScreen.id: (context) => const HomeScreen(),
       },
     );
   }

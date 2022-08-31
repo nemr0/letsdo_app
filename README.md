@@ -7,6 +7,6 @@ Thanks for beautiful design of [Let's Do](https://www.behance.net/gallery/126284
 This is an Implementation of a TODO App using:
 - Flutter Hooks
 - Riverpod
-- MongoDB
+- Back4app (parse)
 
 <a href="https://ibb.co/kQMMwdd"><img src="https://i.ibb.co/86XXfhh/f7407e126284153-612a40aaf3359.png" alt="f7407e126284153-612a40aaf3359" border="0" /></a>

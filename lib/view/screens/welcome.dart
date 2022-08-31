@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:letsdo_app/view/screens/signup.dart';
-import 'package:rounded_loading_button/rounded_loading_button.dart';
-
 import '../../constants.dart';
 import '../handlers/handle_statusbar_brightness.dart';
 import '../widgets/already_a_user.dart';
@@ -102,7 +100,6 @@ class WelcomeTwoScreen extends StatelessWidget {
         const Spacer(),
         Button(
           animateOnTap: false,
-          controller: RoundedLoadingButtonController(),
           text: 'Sign Up',
           btnMode: ButtonMode.full,
           onPressed: () => Navigator.pushNamed(context, SignUpScreen.id),

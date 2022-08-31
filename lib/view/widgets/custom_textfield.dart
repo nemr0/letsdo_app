@@ -9,6 +9,7 @@ class CustomTextField extends HookWidget {
     required this.controller,
     required this.tag,
     this.onSubmitted,
+    this.validator,
     required this.width,
     this.textInputAction = TextInputAction.next,
     required this.name,
@@ -20,6 +21,7 @@ class CustomTextField extends HookWidget {
   final String name;
   final String tag;
   final bool isObscure;
+  final String? Function(String?)? validator;
   final void Function(String)? onSubmitted;
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,10 @@ class CustomTextField extends HookWidget {
         type: MaterialType.transparency,
         child: SizedBox(
             width: width * .8,
-            child: TextField(
+            child: TextFormField(
+              validator: validator,
               controller: controller,
-              onSubmitted: onSubmitted,
+              onFieldSubmitted: onSubmitted,
               obscureText: isObscure ? isVisible.value : false,
               textInputAction: TextInputAction.next,
               textAlign: TextAlign.start,
