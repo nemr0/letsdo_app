@@ -24,7 +24,9 @@ class ForgotScreen extends StatelessWidget {
             const Spacer(
               flex: 3,
             ),
-            const ArrowBackButton(),
+            ArrowBackButton(
+              formKey: forgotFormKey,
+            ),
             const Spacer(),
             Align(
                 alignment: AlignmentDirectional.topStart,

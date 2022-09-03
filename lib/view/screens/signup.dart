@@ -28,7 +28,9 @@ class SignUpScreen extends StatelessWidget {
                 const Spacer(
                   flex: 3,
                 ),
-                const ArrowBackButton(),
+                ArrowBackButton(
+                  formKey: registerFormKey,
+                ),
                 const Spacer(),
                 Align(
                     alignment: AlignmentDirectional.topStart,

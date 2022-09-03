@@ -4,18 +4,13 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:flutter/material.dart';
 
 import '../controller/login_signup_forgot_controllers.dart';
+import '../model/validators.dart';
 import '../view/widgets/snackbars.dart';
 
 onForgot(BuildContext context, WidgetRef ref) async {
   final ctr = ref.read(forgotBtnController);
-  bool? isValidated = ref.read(forgotFormKey).currentState?.validate();
-  print(isValidated);
-  if (isValidated == null || !isValidated) {
-    ctr.error();
-    await Future.delayed(const Duration(seconds: 1));
-    ctr.reset();
-    return;
-  }
+  final bool isValidated = await validate(ref, forgotFormKey, ctr);
+  if (!isValidated) return;
   ParseUser user =
       ParseUser(null, null, ref.read(usernameControllerProvider).text);
   ParseResponse response = await user.requestPasswordReset();

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:letsdo_app/controller/login_signup_forgot_controllers.dart';
 
 import '../../../constants.dart';
 
 class ArrowBackButton extends StatelessWidget {
+  final Provider<GlobalKey<FormState>> formKey;
   const ArrowBackButton({
     Key? key,
+    required this.formKey,
   }) : super(key: key);
 
   @override
@@ -17,14 +21,20 @@ class ArrowBackButton extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border.all(color: greyColor),
             borderRadius: const BorderRadius.all(Radius.circular(50))),
-        child: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            color: Colors.transparent,
-            splashRadius: 25,
-            icon: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Theme.of(context).colorScheme.onSecondary,
-            )),
+        child: Consumer(
+            builder: (BuildContext context, WidgetRef ref, Widget? child) {
+          return IconButton(
+              onPressed: () {
+                ref.read(loginFormKey).currentState?.reset();
+                Navigator.of(context).pop();
+              },
+              color: Colors.transparent,
+              splashRadius: 25,
+              icon: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: Theme.of(context).colorScheme.onSecondary,
+              ));
+        }),
       ),
     );
   }

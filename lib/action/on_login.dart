@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:letsdo_app/controller/login_signup_forgot_controllers.dart';
 import 'package:letsdo_app/model/back4app/auth/login_model.dart';
+import 'package:letsdo_app/model/validators.dart';
 import 'package:letsdo_app/view/screens/home.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
@@ -12,15 +13,9 @@ onLogin(BuildContext context, WidgetRef ref) async {
   final ctr = ref.read(loginBtnController);
   final String emailOrUsername = ref.read(usernameControllerProvider).text;
   final String pwd = ref.read(pwdControllerProvider).text;
-  bool? isValidated = ref.read(loginFormKey).currentState?.validate();
-  print(isValidated);
+  final bool isValidated = await validate(ref, loginFormKey, ctr);
+  if (!isValidated) return;
 
-  if (isValidated == null || !isValidated) {
-    ctr.error();
-    await Future.delayed(const Duration(seconds: 1));
-    ctr.reset();
-    return;
-  }
   ParseResponse response =
       await login(emailOrUsername: emailOrUsername, password: pwd);
 

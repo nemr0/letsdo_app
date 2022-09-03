@@ -28,7 +28,9 @@ class LoginScreen extends StatelessWidget {
                 const Spacer(
                   flex: 3,
                 ),
-                const ArrowBackButton(),
+                ArrowBackButton(
+                  formKey: loginFormKey,
+                ),
                 const Spacer(),
                 Align(
                     alignment: AlignmentDirectional.topStart,
@@ -92,6 +94,4 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-
-  login() {}
 }
