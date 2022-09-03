@@ -1,3 +1,4 @@
+import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
@@ -8,6 +9,8 @@ import '../model/validators.dart';
 import '../view/widgets/snackbars.dart';
 
 onForgot(BuildContext context, WidgetRef ref) async {
+  final bool isConnected = await Connectivity().checkConnection();
+  if (!isConnected) return;
   final ctr = ref.read(forgotBtnController);
   final bool isValidated = await validate(ref, forgotFormKey, ctr);
   if (!isValidated) return;

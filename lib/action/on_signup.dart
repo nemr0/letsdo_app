@@ -1,26 +1,26 @@
 import 'package:cross_connectivity/cross_connectivity.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:letsdo_app/controller/login_signup_forgot_controllers.dart';
-import 'package:letsdo_app/model/back4app/auth/login_model.dart';
-import 'package:letsdo_app/model/validators.dart';
-import 'package:letsdo_app/view/screens/home.dart';
+import 'package:letsdo_app/model/back4app/auth/register_model.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-
+import 'package:flutter/material.dart';
+import '../model/validators.dart';
+import '../view/screens/home.dart';
 import '../view/widgets/snackbars.dart';
 
-onLogin(BuildContext context, WidgetRef ref) async {
+onSignUp(BuildContext context, WidgetRef ref) async {
   final bool isConnected = await Connectivity().checkConnection();
   if (!isConnected) return;
-  final ctr = ref.read(loginBtnController);
-  final String emailOrUsername = ref.read(usernameControllerProvider).text;
+  final ctr = ref.read(registerBtnController);
+  final String username = ref.read(usernameControllerProvider).text;
+  final String email = ref.read(emailControllerProvider).text;
   final String pwd = ref.read(pwdControllerProvider).text;
-  final bool isValidated = await validate(ref, loginFormKey, ctr);
+  final bool isValidated = await validate(ref, registerFormKey, ctr);
   if (!isValidated) return;
 
   ParseResponse response =
-      await login(emailOrUsername: emailOrUsername, password: pwd);
+      await register(email: email, password: pwd, username: username);
 
   if (response.success) {
     await Future.delayed(

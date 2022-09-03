@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:letsdo_app/action/on_signup.dart';
 import 'package:letsdo_app/controller/login_signup_forgot_controllers.dart';
 import 'package:letsdo_app/model/validators.dart';
 import 'package:letsdo_app/view/widgets/buttons/button.dart';
@@ -68,15 +69,18 @@ class SignUpScreen extends StatelessWidget {
                   name: 'Password',
                   isObscure: true,
                   textInputAction: TextInputAction.done,
-                  onSubmitted: (s) {},
-                  validator: validateEmail,
+                  onSubmitted: (s) {
+                    ref.read(registerBtnController).start();
+                    onSignUp(context, ref);
+                  },
+                  validator: validatePwd,
                 ),
                 const Spacer(
                   flex: 2,
                 ),
                 Button(
                     btnMode: ButtonMode.full,
-                    onPressed: () {},
+                    onPressed: () => onSignUp(context, ref),
                     controller: ref.watch(registerBtnController),
                     text: 'Sign Up',
                     animateOnTap: true),
