@@ -1,8 +1,9 @@
 import 'package:cross_connectivity/cross_connectivity.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:letsdo_app/model/back4app/initialize.dart';
 import 'package:letsdo_app/theme.dart';
 import 'package:letsdo_app/view/screens/forgot_password.dart';
 import 'package:letsdo_app/view/screens/home.dart';
@@ -10,12 +11,21 @@ import 'package:letsdo_app/view/screens/login.dart';
 import 'package:letsdo_app/view/screens/signup.dart';
 import 'package:letsdo_app/view/screens/welcome.dart';
 import 'package:letsdo_app/view/widgets/snackbars.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'controller/global_controllers_providers.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeParse();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  /// Using Firebase Emulators in Debug Mode
+  // if (kDebugMode) {
+  //   await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  // }
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -46,14 +56,15 @@ class MyApp extends ConsumerWidget {
           }
         }
         prev.toSomething(isConnected);
+        final User? user = FirebaseAuth.instance.currentUser;
         return MaterialApp(
           scaffoldMessengerKey: scaffoldMessengerKey,
           debugShowCheckedModeBanner: false,
           title: 'Let\'s Do App!',
-          themeMode: ThemeMode.system,
+          themeMode: ThemeMode.light,
           theme: ThemeOfLetsDo.lightTheme(),
           darkTheme: ThemeOfLetsDo.darkTheme(),
-          initialRoute: WelcomeOneScreen.id,
+          initialRoute: user == null ? WelcomeOneScreen.id : HomeScreen.id,
           routes: {
             WelcomeOneScreen.id: (context) => const WelcomeOneScreen(),
             WelcomeTwoScreen.id: (context) => const WelcomeTwoScreen(),

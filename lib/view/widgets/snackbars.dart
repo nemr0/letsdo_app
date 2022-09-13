@@ -22,8 +22,11 @@ conSnackBar({
         borderRadius: BorderRadius.circular(6),
         gradient: LinearGradient(
             colors: isOffline
-                ? [blackColor, Colors.red]
-                : [blackColor, Colors.green]),
+                ? [blackColor.withOpacity(.7), Colors.redAccent.withOpacity(.7)]
+                : [
+                    blackColor.withOpacity(.7),
+                    Colors.greenAccent.withOpacity(.7)
+                  ]),
       ),
       child: Row(
         children: [
@@ -50,8 +53,7 @@ conSnackBar({
         ],
       ),
     ),
-    duration:
-        isOffline ? const Duration(days: 365) : const Duration(seconds: 3),
+    duration: const Duration(seconds: 3),
   );
 }
 
@@ -74,8 +76,14 @@ SnackBar snkbr(bool isSuccess, String text, BuildContext context,
           borderRadius: BorderRadius.circular(5),
           gradient: LinearGradient(
               colors: (!isSuccess)
-                  ? [blackColor, Colors.redAccent]
-                  : [blackColor, Colors.greenAccent]),
+                  ? [
+                      blackColor.withOpacity(.7),
+                      Colors.redAccent.withOpacity(.7)
+                    ]
+                  : [
+                      blackColor.withOpacity(.7),
+                      Colors.greenAccent.withOpacity(.7)
+                    ]),
         ),
         child: Row(
           children: [

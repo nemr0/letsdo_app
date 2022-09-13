@@ -71,14 +71,14 @@ class Button extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
-                fixedSize: Size(width * .8, 60),
-                primary: btnMode == ButtonMode.start
+                backgroundColor: btnMode == ButtonMode.start
                     ? isDark
                         ? blackColor
                         : whiteColor
                     : (btnMode == ButtonMode.cancel)
                         ? greyColor
                         : primaryColor,
+                fixedSize: Size(width * .8, 60),
               ),
               onPressed: onPressed,
               child: Text(

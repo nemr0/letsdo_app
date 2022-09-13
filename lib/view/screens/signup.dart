@@ -47,11 +47,11 @@ class SignUpScreen extends StatelessWidget {
                   flex: 2,
                 ),
                 CustomTextField(
-                  controller: ref.watch(usernameControllerProvider),
-                  tag: 'username',
+                  controller: ref.watch(nameControllerProvider),
+                  tag: 'name',
                   width: width,
-                  name: 'Username',
-                  validator: validateUsernameOrEmail,
+                  name: 'Name',
+                  // validator: validateName,
                 ),
                 const Spacer(),
                 CustomTextField(

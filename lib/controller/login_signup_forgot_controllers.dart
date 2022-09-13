@@ -28,7 +28,7 @@ final registerBtnController =
         (ref) => RoundedLoadingButtonController());
 
 ///Username [TextEditingController] [Provider]
-final usernameControllerProvider = Provider.autoDispose<TextEditingController>(
+final nameControllerProvider = Provider.autoDispose<TextEditingController>(
     (ref) => TextEditingController());
 
 ///Password [TextEditingController] [Provider]

@@ -54,8 +54,8 @@ class ForgotScreen extends StatelessWidget {
                   Form(
                 key: ref.watch(forgotFormKey),
                 child: CustomTextField(
-                  controller: ref.watch(usernameControllerProvider),
-                  tag: 'username',
+                  controller: ref.watch(emailControllerProvider),
+                  tag: 'email',
                   width: width,
                   name: 'Email',
                   validator: validateEmail,
