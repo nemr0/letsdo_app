@@ -1,6 +1,6 @@
 # letsdo_app
 
-## An Implementation of A TODO App with Flutter+Back4App
+## An Implementation of A TODO App with Flutter+Firebase
 
 Thanks for beautiful design of [Let's Do](https://www.behance.net/gallery/126284153/Lets-Do-App-To-Do-List/modules/716844007 "Let's Do") from [Maftukhah Dwi Utami](https://www.behance.net/maftukhahdu "Maftukhah Dwi Utami")
 
