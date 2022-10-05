@@ -7,6 +7,7 @@ class CustomTextField extends HookWidget {
   const CustomTextField({
     Key? key,
     required this.controller,
+    this.isSearch = false,
     required this.tag,
     this.onSubmitted,
     this.validator,
@@ -15,6 +16,7 @@ class CustomTextField extends HookWidget {
     required this.name,
     this.isObscure = false,
   }) : super(key: key);
+  final bool isSearch;
   final TextEditingController controller;
   final TextInputAction textInputAction;
   final double width;

@@ -50,8 +50,12 @@ class SignUpScreen extends StatelessWidget {
                   controller: ref.watch(nameControllerProvider),
                   tag: 'name',
                   width: width,
-                  name: 'Name',
-                  // validator: validateName,
+                  name: 'Username',
+                  validator: (s) => s == null || s.isEmpty || s.contains(' ')
+                      ? 'Please Enter A Correct Username'
+                      : (s.length < 4)
+                          ? 'At Least 4 Characters Are Allowed'
+                          : null,
                 ),
                 const Spacer(),
                 CustomTextField(

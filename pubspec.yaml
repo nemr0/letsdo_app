@@ -41,6 +41,9 @@ dependencies:
   firebase_core: ^1.21.1
   firebase_auth: ^3.7.0
   cloud_firestore: ^3.4.6
+  flutter_svg: ^1.1.5
+  random_avatar: ^0.0.7
+  table_calendar: ^3.0.7
 
 dev_dependencies:
   flutter_test:
@@ -62,4 +65,14 @@ icons_launcher:
       enable: true
     ios:
       enable: true
+      
+flutter_native_splash:
+  color: "#FDFDFD"
+  color_dark: "#272A33"
+  image: assets_splash/splash_logo.png
+  branding_mode: bottom
+  android_gravity: center
+  ios_content_mode: center
+  info_plist_files:
+    - 'ios/Runner/Info.plist'
 

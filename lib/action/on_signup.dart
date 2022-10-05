@@ -7,7 +7,7 @@ import 'package:letsdo_app/model/firebase/auth.dart';
 import 'package:letsdo_app/view/handlers/animate_button.dart';
 
 import '../model/validators.dart';
-import '../view/screens/home.dart';
+import '../view/screens/home/home_body.dart';
 import '../view/widgets/snackbars.dart';
 
 onSignUp(BuildContext context, WidgetRef ref) async {
@@ -40,7 +40,7 @@ onSignUp(BuildContext context, WidgetRef ref) async {
   String? e;
   // Triggering Firebase to Register
   await Auth()
-      .register(email, pwd, name: name.isEmpty ? null : name)
+      .register(email, pwd, name)
       .onError((error, stackTrace) => e = error.toString());
   // show snack bar with results and trigger success or fail animation
   // if there's no error

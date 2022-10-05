@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:letsdo_app/controller/login_signup_forgot_controllers.dart';
 import 'package:letsdo_app/model/validators.dart';
 import 'package:letsdo_app/view/handlers/animate_button.dart';
-import 'package:letsdo_app/view/screens/home.dart';
+import 'package:letsdo_app/view/screens/home/home_body.dart';
 
 import '../model/firebase/auth.dart';
 import '../view/widgets/snackbars.dart';
@@ -29,7 +29,6 @@ onLogin(BuildContext context, WidgetRef ref) async {
 
   /// Email from Controller
   final String email = ref.read(emailControllerProvider).text;
-  print(email);
 
   /// Password from Controller
   final String pwd = ref.read(pwdControllerProvider).text;
@@ -53,8 +52,8 @@ onLogin(BuildContext context, WidgetRef ref) async {
     SchedulerBinding.instance.addPostFrameCallback(
       (timeStamp) => ScaffoldMessenger.of(context).showSnackBar(
         snkbr(true, 'Welcome, ${name ?? 'Stranger'}!', context),
-      ), //showSnackBar
-    ); //addPostFrameCallback
+      ), // showSnackBar
+    ); // addPostFrameCallback
   } else {
     // trigger button error animation
     animateFailureBtn(btn: loginBtnController, read: ref.read);

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Auth {
@@ -11,16 +12,17 @@ class Auth {
     return FirebaseAuth.instance.currentUser?.displayName;
   }
 
-  Future<void> register(String email, String pwd, {String? name}) async {
+  Future<void> register(String email, String pwd, String name) async {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: pwd);
 
-      if (name != null && name.isNotEmpty) {
-        await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
-      }
+      await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .update({'email': email, 'username': name});
     } on FirebaseAuthException catch (e) {
-      print(e);
       return Future.error(e.message ?? 'unknown.error');
     }
   }

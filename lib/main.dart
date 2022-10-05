@@ -1,14 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:letsdo_app/theme.dart';
 import 'package:letsdo_app/view/screens/forgot_password.dart';
-import 'package:letsdo_app/view/screens/home.dart';
+import 'package:letsdo_app/view/screens/home/home_body.dart';
 import 'package:letsdo_app/view/screens/login.dart';
 import 'package:letsdo_app/view/screens/signup.dart';
+import 'package:letsdo_app/view/screens/today/today_view.dart';
 import 'package:letsdo_app/view/screens/welcome.dart';
 import 'package:letsdo_app/view/widgets/snackbars.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,6 +21,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseFirestore.instance.settings = const Settings(
+      persistenceEnabled: true, cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
 
   /// Using Firebase Emulators in Debug Mode
   // if (kDebugMode) {
@@ -61,7 +64,7 @@ class MyApp extends ConsumerWidget {
           scaffoldMessengerKey: scaffoldMessengerKey,
           debugShowCheckedModeBanner: false,
           title: 'Let\'s Do App!',
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.dark,
           theme: ThemeOfLetsDo.lightTheme(),
           darkTheme: ThemeOfLetsDo.darkTheme(),
           initialRoute: user == null ? WelcomeOneScreen.id : HomeScreen.id,
@@ -72,6 +75,7 @@ class MyApp extends ConsumerWidget {
             LoginScreen.id: (context) => const LoginScreen(),
             ForgotScreen.id: (context) => const ForgotScreen(),
             HomeScreen.id: (context) => const HomeScreen(),
+            TodayScreen.id: (context) => const TodayScreen(),
           },
         );
       }),
