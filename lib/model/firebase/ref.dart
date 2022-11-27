@@ -7,5 +7,5 @@ class FBRef {
   Query<Map<String, dynamic>> usernameToEmail(String username) =>
       FirebaseFirestore.instance
           .collection('Users')
-          .where(username, isEqualTo: username);
+          .where('username', isEqualTo: username);
 }

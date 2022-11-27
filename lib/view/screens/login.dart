@@ -46,20 +46,19 @@ class LoginScreen extends StatelessWidget {
                   flex: 3,
                 ),
                 CustomTextField(
-                    controller: ref.watch(emailControllerProvider),
-                    tag: 'email',
-                    width: width,
-                    name: 'Email',
-                    validator: validateEmail),
+                    controller: ref.watch(emailOrUsernameCtrProvider),
+                    name: 'Email/Username',
+                    validator: validateEmailOrUsername),
                 const Spacer(),
                 CustomTextField(
                   controller: ref.watch(pwdControllerProvider),
-                  tag: 'password',
-                  width: width,
                   name: 'Password',
                   isObscure: true,
                   textInputAction: TextInputAction.done,
-                  onSubmitted: (s) => onLogin(context, ref),
+                  onSubmitted: (s) {
+                    ref.read(loginBtnController).start();
+                    onLogin(context, ref);
+                  },
                   validator: validatePwd,
                 ),
                 const Spacer(

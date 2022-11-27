@@ -8,10 +8,8 @@ class CustomTextField extends HookWidget {
     Key? key,
     required this.controller,
     this.isSearch = false,
-    required this.tag,
     this.onSubmitted,
     this.validator,
-    required this.width,
     this.textInputAction = TextInputAction.next,
     required this.name,
     this.isObscure = false,
@@ -19,17 +17,17 @@ class CustomTextField extends HookWidget {
   final bool isSearch;
   final TextEditingController controller;
   final TextInputAction textInputAction;
-  final double width;
   final String name;
-  final String tag;
   final bool isObscure;
   final String? Function(String?)? validator;
   final void Function(String)? onSubmitted;
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
+
     final isVisible = useState(true);
     return Hero(
-      tag: tag,
+      tag: name.toLowerCase(),
       child: Material(
         type: MaterialType.transparency,
         child: SizedBox(

@@ -3,8 +3,8 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 Future<void> animateFailureBtn(
     {required AutoDisposeProvider<RoundedLoadingButtonController>? btn,
-    required Reader read}) async {
-  final btnCo = read(btn!);
+    required WidgetRef ref}) async {
+  final btnCo = ref.read(btn!);
   btnCo.error();
   await Future.delayed(const Duration(milliseconds: 400));
   // await showNoInternet(context: context);
@@ -13,9 +13,9 @@ Future<void> animateFailureBtn(
 
 Future<void> animateSuccessBtn(
     {required AutoDisposeProvider<RoundedLoadingButtonController>? btn,
-    required Reader read}) async {
+    required WidgetRef ref}) async {
   await Future.delayed(Duration.zero);
-  final btnCo = read(btn!);
+  final btnCo = ref.read(btn!);
   btnCo.success();
   await Future.delayed(const Duration(milliseconds: 400));
   // await showNoInternet(context: context);

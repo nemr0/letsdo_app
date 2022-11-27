@@ -7,6 +7,8 @@ import 'package:letsdo_app/model/weekday_to_string.dart';
 import 'package:letsdo_app/view/handlers/handle_statusbar_brightness.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../widgets/day_builder.dart';
+
 class TodayScreen extends HookConsumerWidget {
   const TodayScreen({Key? key}) : super(key: key);
   static const String id = '/home/today';
@@ -50,7 +52,7 @@ class TodayScreen extends HookConsumerWidget {
                   rightChevronVisible: false),
               onDaySelected: (nowSelectedDay, nowFocusedDay) {
                 focusedDay.value = nowFocusedDay;
-                ref.read(selectedDateProvider.state).state = nowSelectedDay;
+                ref.read(selectedDateProvider.notifier).state = nowSelectedDay;
               },
               daysOfWeekVisible: false,
               calendarBuilders: CalendarBuilders(
@@ -82,62 +84,5 @@ class TodayScreen extends HookConsumerWidget {
         ),
       ),
     );
-  }
-
-  dayBuilder(
-    DateTime day, {
-    bool isSelected = true,
-    BuildContext? context,
-    bool isToday = false,
-    bool isOutside = false,
-  }) {
-    final TextStyle selectedWeekDayTS = TextStyle(
-        letterSpacing: 2,
-        color: (isSelected)
-            ? // selected = true
-            isToday
-                // today
-                ? Theme.of(context!).colorScheme.background
-                // not today
-                : Theme.of(context!)
-                    .colorScheme
-                    .onBackground
-                    .withOpacity(isOutside ? 0.4 : 1)
-            :
-            // selected  false
-            Theme.of(context!)
-                .colorScheme
-                .onBackground
-                .withOpacity(isOutside ? 0.8 : 1),
-        fontSize: 12,
-        fontFamily: GoogleFonts.roboto().fontFamily);
-    return Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Spacer(
-            flex: 2,
-          ),
-          FittedBox(
-            child: Text(
-              weekdayToString(day),
-              style: selectedWeekDayTS,
-            ),
-          ),
-          const Spacer(),
-          FittedBox(
-            child: Text(
-              day.day.toString(),
-              style: selectedWeekDayTS.copyWith(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const Spacer(
-            flex: 2,
-          ),
-        ]);
   }
 }

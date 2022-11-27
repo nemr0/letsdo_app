@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:letsdo_app/controller/login_signup_forgot_controllers.dart';
+import 'package:letsdo_app/view/screens/welcome.dart';
 
 import '../../../constants.dart';
 
-class ArrowBackButton extends StatelessWidget {
+class ArrowBackButton extends ConsumerWidget {
   final Provider<GlobalKey<FormState>> formKey;
   const ArrowBackButton({
     Key? key,
@@ -12,7 +13,7 @@ class ArrowBackButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final width = MediaQuery.of(context).size.width;
     return Align(
       alignment: AlignmentDirectional.topStart,
@@ -25,8 +26,16 @@ class ArrowBackButton extends StatelessWidget {
             builder: (BuildContext context, WidgetRef ref, Widget? child) {
           return IconButton(
               onPressed: () {
-                ref.read(loginFormKey).currentState?.reset();
-                Navigator.of(context).pop();
+                ref.read(formKey).currentState?.reset();
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => const WelcomeTwoScreen(),
+                    transitionDuration: const Duration(milliseconds: 500),
+                    transitionsBuilder: (_, anim, __, child) =>
+                        FadeTransition(opacity: anim, child: child),
+                  ),
+                );
               },
               color: Colors.transparent,
               splashRadius: 25,

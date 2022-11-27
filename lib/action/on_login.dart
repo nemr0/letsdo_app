@@ -8,7 +8,7 @@ import 'package:letsdo_app/view/handlers/animate_button.dart';
 import 'package:letsdo_app/view/screens/home/home_body.dart';
 
 import '../model/firebase/auth.dart';
-import '../view/widgets/snackbars.dart';
+import '../view/widgets/snack_bar.dart';
 
 onLogin(BuildContext context, WidgetRef ref) async {
   /// Checks Connection using Connectivity Package
@@ -17,18 +17,17 @@ onLogin(BuildContext context, WidgetRef ref) async {
   /// Button Controller
   // if no connection shows error and returns
   if (!isConnected) {
-    animateFailureBtn(btn: loginBtnController, read: ref.read);
+    animateFailureBtn(btn: loginBtnController, ref: ref);
     return;
   }
 
   /// Triggers Validate Form Action and shows error on not valid
-  final bool isValidated =
-      await validate(ref.read, loginFormKey, loginBtnController);
+  final bool isValidated = validate(ref, loginFormKey, loginBtnController);
   // returns if not valid
   if (!isValidated) return;
 
   /// Email from Controller
-  final String email = ref.read(emailControllerProvider).text;
+  final String emailOrUsername = ref.read(emailOrUsernameCtrProvider).text;
 
   /// Password from Controller
   final String pwd = ref.read(pwdControllerProvider).text;
@@ -37,30 +36,31 @@ onLogin(BuildContext context, WidgetRef ref) async {
   String? e;
   // Triggering Firebase to login, returns user display name
   String? name = await Auth()
-      .login(email, pwd)
+      .login(emailOrUsername, pwd)
       .onError((error, stackTrace) => e = error.toString());
   // show snack bar with results and trigger success or fail animation
   // if there's no error
   if (e == null) {
     // trigger button success animation
-    animateSuccessBtn(btn: loginBtnController, read: ref.read);
+    await animateSuccessBtn(btn: loginBtnController, ref: ref);
     // Push [HomeScreen]
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) =>
         Navigator.of(context)
             .pushNamedAndRemoveUntil(HomeScreen.id, (route) => false));
     // Show Success Msg
-    SchedulerBinding.instance.addPostFrameCallback(
-      (timeStamp) => ScaffoldMessenger.of(context).showSnackBar(
-        snkbr(true, 'Welcome, ${name ?? 'Stranger'}!', context),
+    Future.delayed(
+      Duration.zero,
+      () => ScaffoldMessenger.of(context).showSnackBar(
+        snackBar(true, 'Welcome, ${name ?? 'Stranger'}!', context),
       ), // showSnackBar
     ); // addPostFrameCallback
   } else {
     // trigger button error animation
-    animateFailureBtn(btn: loginBtnController, read: ref.read);
+    animateFailureBtn(btn: loginBtnController, ref: ref);
     // Show Error Msg
     SchedulerBinding.instance.addPostFrameCallback(
       (timeStamp) => ScaffoldMessenger.of(context).showSnackBar(
-        snkbr(false, e!, context),
+        snackBar(false, e!, context),
       ), //showSnackBar
     ); //addPostFrameCallback
   }

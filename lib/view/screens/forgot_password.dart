@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:letsdo_app/model/validators.dart';
+
 import '../../action/on_forgot.dart';
 import '../../controller/login_signup_forgot_controllers.dart';
 import '../widgets/buttons/arrow_back_button.dart';
@@ -10,6 +11,7 @@ import '../widgets/custom_textfield.dart';
 class ForgotScreen extends StatelessWidget {
   const ForgotScreen({Key? key}) : super(key: key);
   static const id = '/forgot';
+
   @override
   Widget build(
     BuildContext context,
@@ -54,9 +56,7 @@ class ForgotScreen extends StatelessWidget {
                   Form(
                 key: ref.watch(forgotFormKey),
                 child: CustomTextField(
-                  controller: ref.watch(emailControllerProvider),
-                  tag: 'email',
-                  width: width,
+                  controller: ref.watch(emailOrUsernameCtrProvider),
                   name: 'Email',
                   validator: validateEmail,
                 ),

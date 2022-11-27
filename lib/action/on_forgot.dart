@@ -7,27 +7,26 @@ import 'package:letsdo_app/view/handlers/animate_button.dart';
 
 import '../controller/login_signup_forgot_controllers.dart';
 import '../model/validators.dart';
-import '../view/widgets/snackbars.dart';
+import '../view/widgets/snack_bar.dart';
 
 /// On Forgot Button Pressed
 onForgot(BuildContext context, WidgetRef ref) async {
+  /// Triggers Validate Form Action and shows error on not valid
+  final bool isValidated = validate(ref, forgotFormKey, forgotBtnController);
+  // returns if not valid
+  if (!isValidated) return;
+
   /// Checks Connection using Connectivity Package
   final bool isConnected = await Connectivity().checkConnection();
 
   // if no connection shows error and returns
   if (!isConnected) {
-    animateFailureBtn(btn: forgotBtnController, read: ref.read);
+    animateFailureBtn(btn: forgotBtnController, ref: ref);
     return;
   }
 
-  /// Triggers Validate Form Action and shows error on not valid
-  final bool isValidated =
-      await validate(ref.read, forgotFormKey, forgotBtnController);
-  // returns if not valid
-  if (!isValidated) return;
-
   /// Email from Controller
-  final email = ref.read(emailControllerProvider).text;
+  final email = ref.read(emailOrUsernameCtrProvider).text;
 
   /// Error for send forgot email func, if null there's no error
   String? err;
@@ -40,9 +39,9 @@ onForgot(BuildContext context, WidgetRef ref) async {
   // if there's no error
   if (err == null) {
     // trigger button success animation
-    animateSuccessBtn(btn: forgotBtnController, read: ref.read);
+    await animateSuccessBtn(btn: forgotBtnController, ref: ref);
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) =>
-        ScaffoldMessenger.of(context).showSnackBar(snkbr(
+        ScaffoldMessenger.of(context).showSnackBar(snackBar(
             true, 'Successfully Sent Request, Check Your Mail! :)', context)));
 
     // pop current context
@@ -50,11 +49,11 @@ onForgot(BuildContext context, WidgetRef ref) async {
         .addPostFrameCallback((timeStamp) => Navigator.pop(context));
   } else {
     // trigger button error animation
-    animateFailureBtn(btn: forgotBtnController, read: ref.read);
+    animateFailureBtn(btn: forgotBtnController, ref: ref);
     // Show Error msg
     SchedulerBinding.instance.addPostFrameCallback(
       (timeStamp) => ScaffoldMessenger.of(context).showSnackBar(
-        snkbr(false, err.toString(), context),
+        snackBar(false, err.toString(), context),
       ),
     );
   }

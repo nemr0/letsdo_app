@@ -3,12 +3,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:letsdo_app/model/firebase/ref.dart';
 
 class FBGet {
-  email(String username) async {
+  Future<String?> email(String username) async {
     try {
       var data = await FBRef().usernameToEmail(username).get();
-      data.docs.first.get('email');
+      return data.docs.first.data()['email'];
     } on FirebaseException catch (e) {
-      return e.message;
+      return Future.error(e.message.toString());
+    }
+  }
+
+  Future<bool> usernameExists(String username) async {
+    try {
+      var data = await FBRef().usernameToEmail(username).get();
+      return data.docs.isNotEmpty;
+    } on FirebaseException catch (e) {
+      return Future.error(e.message.toString());
     }
   }
 }

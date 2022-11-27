@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:letsdo_app/action/on_signup.dart';
+import 'package:letsdo_app/action/on_register.dart';
 import 'package:letsdo_app/controller/login_signup_forgot_controllers.dart';
 import 'package:letsdo_app/model/validators.dart';
 import 'package:letsdo_app/view/widgets/buttons/button.dart';
@@ -48,34 +48,24 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 CustomTextField(
                   controller: ref.watch(nameControllerProvider),
-                  tag: 'name',
-                  width: width,
                   name: 'Username',
-                  validator: (s) => s == null || s.isEmpty || s.contains(' ')
-                      ? 'Please Enter A Correct Username'
-                      : (s.length < 4)
-                          ? 'At Least 4 Characters Are Allowed'
-                          : null,
+                  validator: validateUsername,
                 ),
                 const Spacer(),
                 CustomTextField(
-                  controller: ref.watch(emailControllerProvider),
-                  tag: 'email',
-                  width: width,
+                  controller: ref.watch(emailOrUsernameCtrProvider),
                   name: 'Email',
                   validator: validateEmail,
                 ),
                 const Spacer(),
                 CustomTextField(
                   controller: ref.watch(pwdControllerProvider),
-                  tag: 'password',
-                  width: width,
                   name: 'Password',
                   isObscure: true,
                   textInputAction: TextInputAction.done,
                   onSubmitted: (s) {
                     ref.read(registerBtnController).start();
-                    onSignUp(context, ref);
+                    onRegisterPressed(context, ref);
                   },
                   validator: validatePwd,
                 ),
@@ -84,7 +74,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 Button(
                     btnMode: ButtonMode.full,
-                    onPressed: () => onSignUp(context, ref),
+                    onPressed: () => onRegisterPressed(context, ref),
                     controller: ref.watch(registerBtnController),
                     text: 'Sign Up',
                     animateOnTap: true),

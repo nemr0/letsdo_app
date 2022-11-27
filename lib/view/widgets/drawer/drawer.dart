@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:letsdo_app/constants.dart';
+import 'package:letsdo_app/view/screens/login.dart';
 import 'package:letsdo_app/view/screens/today/today_view.dart';
 import 'package:random_avatar/random_avatar.dart';
 
@@ -20,6 +21,7 @@ class CustomDrawer extends ConsumerWidget {
         topRight: Radius.circular(20),
         bottomRight: Radius.circular(20),
       )),
+      backgroundColor: Theme.of(context).colorScheme.background,
       child: SafeArea(
         child: SingleChildScrollView(
           child: IntrinsicHeight(
@@ -108,7 +110,11 @@ class CustomDrawer extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        FirebaseAuth.instance.signOut();
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            LoginScreen.id, (route) => false);
+                      },
                       child: Text(
                         'Logout',
                         style: Theme.of(context)

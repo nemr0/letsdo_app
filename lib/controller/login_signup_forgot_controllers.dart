@@ -36,5 +36,5 @@ final pwdControllerProvider = Provider.autoDispose<TextEditingController>(
     (ref) => TextEditingController());
 
 ///Email [TextEditingController] [Provider]
-final emailControllerProvider = Provider.autoDispose<TextEditingController>(
+final emailOrUsernameCtrProvider = Provider.autoDispose<TextEditingController>(
     (ref) => TextEditingController());
